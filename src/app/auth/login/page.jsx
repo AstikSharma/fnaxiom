@@ -22,7 +22,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/login", formData);
+      const response = await axios.post("https://fnaxiombe.onrender.com/api/login", formData);
       setMessage(response.data.message);
       
       if (response.status === 200) {
