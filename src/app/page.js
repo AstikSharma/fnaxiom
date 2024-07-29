@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import OutlinedCard from '@/Components/Card';
-import MainCard from '@/Components/MainCard'; // Import the MainCard component
-import Example from '@/Components/Header';
+import OutlinedCard from '@/app/Components/Card';
+import MainCard from '@/app/Components/MainCard'; // Import the MainCard component
+import Example from '@/app/Components/Header';
 
 export default function Home() {
   return (
