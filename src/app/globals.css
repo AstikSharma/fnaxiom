@@ -18,11 +18,6 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: radial-gradient(circle, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb)));
-  background-attachment: fixed;
-}
 
 /* Apply navy blue background for dark mode */
 .dark-mode {
