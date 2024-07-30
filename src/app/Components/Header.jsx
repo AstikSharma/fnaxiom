@@ -101,7 +101,7 @@ export default function Example() {
           </a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 hover:text-indigo-400">
+          <a href="/auth/login" className="text-sm font-semibold leading-6 hover:text-indigo-400">
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
@@ -182,7 +182,7 @@ export default function Example() {
               </div>
               <div className="py-6">
                 <a
-                  href="#"
+                  href="/auth/login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-800 transition duration-300"
                 >
                   Log in

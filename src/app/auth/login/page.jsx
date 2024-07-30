@@ -20,17 +20,17 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("https://fnaxiombe.onrender.com/api/login", formData);
-      setMessage(response.data.message);
-      
-      if (response.status === 200) {
-        // Store the token in localStorage
-        localStorage.setItem("token", response.data.token);
-        router.push("/assessment");
-      }
-    } catch (error) {
+  e.preventDefault();
+  try {
+    const response = await axios.post("https://fnaxiombe.onrender.com//api/login", formData);
+    setMessage(response.data.message);
+    
+    if (response.status === 200) {
+      // Store the token in localStorage
+      localStorage.setItem("token", response.data.token);
+      router.push("/assessment");
+    }
+  } catch (error) {
       if (error.response) {
         // If email does not exist, redirect to /auth/register
         if (

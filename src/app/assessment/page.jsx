@@ -27,7 +27,7 @@ export default function AssessmentPage() {
     try {
       const token = localStorage.getItem('token'); // Get token from local storage
       const response = await axios.post(
-        'https://fnaxiombe.onrender.com/api/assessment',
+        'https://fnaxiombe.onrender.com//api/assessment',
         { responses },
         { headers: { Authorization: `Bearer ${token}` } }
       );
