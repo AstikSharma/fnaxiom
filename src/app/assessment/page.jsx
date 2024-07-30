@@ -6,14 +6,28 @@ import { useRouter } from 'next/navigation';
 export default function AssessmentPage() {
   const [responses, setResponses] = useState({});
   const [message, setMessage] = useState('');
+  const [assessments, setAssessments] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
       router.push('/auth/login');
+    } else {
+      fetchAssessments(token);
     }
   }, [router]);
+
+  const fetchAssessments = async (token) => {
+    try {
+      const response = await axios.get('https://fnaxiombe.onrender.com/api/assessments', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setAssessments(response.data);
+    } catch (error) {
+      console.error('Failed to fetch assessments', error);
+    }
+  };
 
   const handleChange = (e) => {
     setResponses({
@@ -25,13 +39,14 @@ export default function AssessmentPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token'); // Get token from local storage
+      const token = localStorage.getItem('token');
       const response = await axios.post(
-        'https://fnaxiombe.onrender.com//api/assessment',
+        'https://fnaxiombe.onrender.com/api/assessment',
         { responses },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setMessage(response.data.message);
+      fetchAssessments(token); // Refresh assessments after submission
     } catch (error) {
       console.error(error);
       setMessage(error.response?.data?.error || 'Submission failed');
@@ -102,6 +117,24 @@ export default function AssessmentPage() {
           {message && (
             <p className="mt-4 text-center text-sm text-gray-500">{message}</p>
           )}
+          
+          <div className="mt-10">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Previous Responses</h3>
+            <ul className="mt-4 space-y-4">
+              {assessments.map((assessment, index) => (
+                <li key={index} className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+                  <p className="text-sm font-medium leading-5 text-gray-900">Response {index + 1}</p>
+                  <div className="mt-2 text-sm text-gray-600">
+                    {Object.entries(assessment.responses).map(([key, value]) => (
+                      <p key={key}>
+                        <span className="font-medium">{key}:</span> {value}
+                      </p>
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </>
